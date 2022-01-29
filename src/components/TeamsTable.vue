@@ -39,7 +39,9 @@ export default {
       {
         id: "team_5714.88511895963",
         name: "Team 1",
-        players: [{ fullName: "Awww Vkmk", number: 12 }],
+        players: [
+          { pId: "player_1234.88511895963", fullName: "Awww Vkmk", number: 12 },
+        ],
       },
     ],
 

@@ -15,8 +15,13 @@
               <div class="li_content">
                 {{ player.number }} {{ player.fullName }}
                 <player-edit
-                  :player="player"
-                  :numbers="players.map((pl) => pl.number)"
+                  @updatePlayer="updatePlayer"
+                  :player="JSON.parse(JSON.stringify(player))"
+                  :numbers="
+                    players
+                      .map((pl) => pl.number)
+                      .filter((n) => n !== player.number)
+                  "
                 ></player-edit>
                 <fas
                   @click.stop="deletePlayer(player)"
@@ -97,6 +102,7 @@ export default {
         this.playerNumber !== null
       ) {
         this.players.push({
+          pId: `player_${Math.random() * 10000}`,
           fullName: this.playerName,
           number: this.playerNumber,
         });
@@ -124,6 +130,12 @@ export default {
     },
     deletePlayer(player) {
       this.players = this.players.filter((p) => p.number !== player.number);
+    },
+    updatePlayer(player) {
+      this.players = this.players.map((p) => {
+        if (p.pId === player.pId) return player;
+        return p;
+      });
     },
   },
   computed: {
