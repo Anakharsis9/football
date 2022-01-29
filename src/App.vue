@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <Field class="field"></Field>
-    <info-tables class="infoTables"></info-tables>
+    <Field class="field" :teamsList="teamsList"></Field>
+    <info-tables
+      @teamsListUpdate="teamsList = $event"
+      class="infoTables"
+    ></info-tables>
   </div>
 </template>
 
@@ -15,6 +18,9 @@ export default {
     Field,
     InfoTables,
   },
+  data: () => ({
+    teamsList: [],
+  }),
 };
 </script>
 
@@ -34,11 +40,7 @@ export default {
   grid-template-columns: 2fr 1fr;
   height: 100vh;
 }
-.field {
-}
-.infoTables {
-  
-}
+
 .addBtn {
   width: 180px;
   height: 40px;

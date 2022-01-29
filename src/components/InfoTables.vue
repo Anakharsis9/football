@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <teams-table></teams-table>
+    <teams-table @teamsListUpdate="$emit('teamsListUpdate', $event)"></teams-table>
   </div>
 </template>
 

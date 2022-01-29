@@ -207,7 +207,7 @@ h2 {
 
 .modal_content {
   margin-top: 20px;
-  height: 80%;
+  /* height: 80%; */
   width: 100%;
   display: grid;
   grid-template: auto/1fr 1fr;
@@ -221,6 +221,11 @@ input {
   display: flex;
   flex-direction: column;
   padding-left: 20px;
+}
+.list {
+  height: 270px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
 }
 h4 {
   margin-top: 20px;
