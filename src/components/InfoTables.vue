@@ -17,8 +17,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  // display: flex;
-  // justify-content: center;
-}
+
 </style>
