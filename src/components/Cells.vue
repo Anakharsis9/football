@@ -14,9 +14,9 @@
       >
         <option :value="-1">-</option>
         <option
-          v-for="(player, index) in filterPlayerOptions(teamDist[index])"
+          v-for="player in filterPlayerOptions(teamDist[index])"
           :value="player.number"
-          :key="index"
+          :key="player.number"
         >
           {{ player.number + " " + player.fullName }}
         </option>
@@ -37,7 +37,6 @@ export default {
       const chosenPlayers = Object.values(this.teamDist).filter(
         (number) => currentPlayerNumber !== number
       );
-      console.log(chosenPlayers);
       return this.team.players.filter(
         (player) => !chosenPlayers.includes(player.number)
       );
