@@ -1,14 +1,28 @@
 <template>
   <div class="field_wrapper">
     <match-settings
+      :isGameOver="isGameOver"
       :teamsList="teamsList"
       @settingModeChange="isSettingMode = $event"
       @twoTeams="twoTeams = $event"
+      @startMatch="startMatch"
+      @offGameOver="isGameOver = $event"
     ></match-settings>
     <div class="field_container">
-      <cells :team="twoTeams[0]" v-if="isSettingMode" class="team team1">
+      <cells
+        @getTeamDist="redTeamDist = $event"
+        :team="twoTeams[0]"
+        v-if="isSettingMode"
+        class="team team1"
+      >
       </cells>
-      <cells :team="twoTeams[1]" v-if="isSettingMode" class="team team2"> </cells>
+      <cells
+        @getTeamDist="blueTeamDist = $event"
+        :team="twoTeams[1]"
+        v-if="isSettingMode"
+        class="team team2"
+      >
+      </cells>
     </div>
   </div>
 </template>
@@ -31,8 +45,28 @@ export default {
   data: () => ({
     isSettingMode: false,
     twoTeams: [],
+    redTeamDist: null,
+    blueTeamDist: null,
+    isGameOver: false,
+    matchWinner: null,
   }),
-  methods: {},
+  methods: {
+    startMatch() {
+      if (
+        this.checkTeamDist(this.redTeamDist) &&
+        this.checkTeamDist(this.blueTeamDist)
+      ) {
+        const winner = Math.floor(Math.random() * 2);
+        alert("The match started. There is a hot game going on");
+        this.matchWinner = this.twoTeams[winner];
+        alert(`The winner is ${this.matchWinner.name}!`);
+        this.isGameOver = true;
+      } else alert("Select players for both teams");
+    },
+    checkTeamDist(teamDist) {
+      return !Object.values(teamDist).includes(-1);
+    },
+  },
 };
 </script>
 

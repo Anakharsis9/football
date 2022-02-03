@@ -44,6 +44,15 @@ export default {
     updateCell(index, value) {
       this.teamDist[index] = value;
     },
+    onTeamDistUpdate(newVal) {
+      this.$emit("getTeamDist", newVal);
+    },
+  },
+  watch: {
+    teamDist: "onTeamDistUpdate",
+  },
+  created() {
+    this.onTeamDistUpdate(this.teamDist);
   },
 };
 </script>

@@ -20,7 +20,9 @@
       <button class="addBtn" v-if="isSettingMode" @click="exitSettings">
         Exit
       </button>
-      <button class="addBtn" v-if="isSettingMode">Start Match</button>
+      <button class="addBtn" v-if="isSettingMode" @click="startMatch">
+        Start Match
+      </button>
     </div>
     <div class="team">
       <span class="label"> Second Team: </span>
@@ -43,10 +45,7 @@ export default {
   name: "MatchSettings",
   props: {
     teamsList: Array,
-    selectedCell: {
-      type: Object,
-      required: false,
-    },
+    isGameOver: Boolean,
   },
   data: () => ({
     isSettingMode: false,
@@ -66,6 +65,7 @@ export default {
       }
       this.team2 = validTeams[random2];
       this.$emit("twoTeams", [this.team1, this.team2]);
+      this.$emit("offGameOver", false);
     },
     exitSettings() {
       this.team1 = {};
@@ -75,10 +75,18 @@ export default {
     getRandom(length) {
       return Math.floor(Math.random() * length);
     },
+
+    startMatch() {
+      this.$emit("startMatch");
+    },
   },
+
   watch: {
     isSettingMode: function (newVal) {
       this.$emit("settingModeChange", newVal);
+    },
+    isGameOver: function (newValue) {
+      if (newValue) this.exitSettings();
     },
   },
 };
