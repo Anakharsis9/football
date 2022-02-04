@@ -8,10 +8,7 @@
         ['player' + n]: true,
       }"
     >
-      <select
-        @change="updateCell(index, +$event.target.value)"
-        class="player_select"
-      >
+      <select v-model="teamDist[index]" class="player_select">
         <option :value="-1">-</option>
         <option
           v-for="player in filterPlayerOptions(teamDist[index])"
@@ -28,7 +25,10 @@
 <script>
 export default {
   name: "Cells",
-  props: { team: { type: Object, require: true } },
+  props: {
+    team: { type: Object, require: true },
+    isRandomPlayersPlace: Number,
+  },
   data: () => ({
     teamDist: { 0: -1, 1: -1, 2: -1, 3: -1, 4: -1, 5: -1 },
   }),
@@ -41,15 +41,24 @@ export default {
         (player) => !chosenPlayers.includes(player.number)
       );
     },
-    updateCell(index, value) {
-      this.teamDist[index] = value;
-    },
     onTeamDistUpdate(newVal) {
       this.$emit("getTeamDist", newVal);
+    },
+    getRandomPlayer(players) {
+      const rnd = Math.floor(Math.random() * players.length);
+      let [removed] = players.splice(rnd, 1);
+      return removed.number;
     },
   },
   watch: {
     teamDist: "onTeamDistUpdate",
+    isRandomPlayersPlace: function (newValue) {
+      if (!newValue) return;
+      const players = [...this.team.players];
+      for (const index in this.teamDist) {
+        this.teamDist[index] = this.getRandomPlayer(players);
+      }
+    },
   },
   created() {
     this.onTeamDistUpdate(this.teamDist);

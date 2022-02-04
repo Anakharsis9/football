@@ -113,7 +113,7 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-  height: 50%;
+  height: 40%;
   border: 1px solid gray;
   display: flex;
   align-items: center;

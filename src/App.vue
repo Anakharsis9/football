@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <Field class="field" :teamsList="teamsList"></Field>
+    <Field
+      class="field"
+      @getMatchInfo="playedMatches.push($event)"
+      :teamsList="teamsList"
+    ></Field>
     <info-tables
       @teamsListUpdate="teamsList = $event"
+      :teamsList="teamsList"
+      :playedMatches="playedMatches"
       class="infoTables"
     ></info-tables>
   </div>
@@ -20,6 +26,24 @@ export default {
   },
   data: () => ({
     teamsList: [],
+    playedMatches: [
+      {
+        winner: "Team Spirit",
+        winnerId: "team_4907.978554096723",
+        score: "4:0",
+        date: "3/2/2022 16:46",
+        teams: "Team Spirit vs DreAM Team",
+        teamsIds: ["team_4907.978554096723", "team_7953.730122914287"],
+      },
+      {
+        winner: "DreAM Team",
+        winnerId: "team_7953.730122914287",
+        score: "7:18",
+        date: "3/2/2022 16:46",
+        teams: "Team 1 vs DreAM Team",
+        teamsIds: ["team_5714.88511895963", "team_7953.730122914287"],
+      },
+    ],
   }),
 };
 </script>

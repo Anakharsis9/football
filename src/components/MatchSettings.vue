@@ -23,6 +23,9 @@
       <button class="addBtn" v-if="isSettingMode" @click="startMatch">
         Start Match
       </button>
+      <button class="addBtn" v-if="isSettingMode" @click="randomPlayersPlace">
+        Random players place
+      </button>
     </div>
     <div class="team">
       <span class="label"> Second Team: </span>
@@ -78,6 +81,10 @@ export default {
 
     startMatch() {
       this.$emit("startMatch");
+    },
+
+    randomPlayersPlace() {
+      this.$emit("randomPlayersPlace");
     },
   },
 
