@@ -1,13 +1,8 @@
 <template>
   <div class="wrapper">
-    <teams-table
-      @teamsListUpdate="$emit('teamsListUpdate', $event)"
-    ></teams-table>
-    <match-table :playedMatches="playedMatches"></match-table>
-    <top-teams-table
-      :teamsList="teamsList"
-      :playedMatches="playedMatches"
-    ></top-teams-table>
+    <teams-table @teamsListUpdate="$emit('teamsListUpdate', $event)" />
+    <match-table :playedMatches="playedMatches" />
+    <top-teams-table :teamsList="teamsList" :playedMatches="playedMatches" />
   </div>
 </template>
 

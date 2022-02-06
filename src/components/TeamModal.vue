@@ -93,6 +93,7 @@ export default {
       this.players = [];
       this.playerName = "";
       this.playerNumber = null;
+      console.log("close");
       this.$emit("closeModal");
     },
     addPlayer() {
@@ -153,12 +154,10 @@ export default {
     }
   },
   mounted() {
-    let vm = this;
-    document.addEventListener("click", (item) => {
-      if (item.target === vm.$refs["modal_wrapper"]) {
-        vm.closeModal();
-      }
-    });
+    this.$refs.modal_wrapper.onclick = this.closeModal.bind(this);
+  },
+  beforeDestroy() {
+    this.$refs.modal_wrapper.onclick = null;
   },
 };
 </script>

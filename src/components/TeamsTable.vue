@@ -14,8 +14,8 @@
         <li
           v-for="team in teamsList"
           :key="team.id"
-          class="teamItem"
           @click="openCreateModal(team)"
+          class="teamItem"
         >
           {{ team.name }}
           <fas @click.stop="deleteTeam(team)" class="close" icon="times" />

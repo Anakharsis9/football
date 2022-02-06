@@ -6,7 +6,7 @@
         <span>{{ match.teams }}</span>
         <span>{{ match.score }}</span>
         <span>{{ match.date }}</span>
-        <hr>
+        <hr />
       </li>
     </ul>
   </div>
