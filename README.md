@@ -4,8 +4,9 @@ This is a small and introductory project with Vue.js . The project is called foo
 - match setup,
 - the randomness of two teams,
 - the distribution of players on the field, 
-- the conduct of the match. 
-I liked the project in general, and I understood more about the foundation of the framework Vue.js
+- the conduct of the match.
+ 
+I liked the project in general, and I understood more about the foundation of the framework Vue.js :+1:
 
 ## Project setup
 ```
