@@ -6,7 +6,9 @@ This is a small and introductory project with Vue.js . The project is called foo
 - the distribution of players on the field, 
 - the conduct of the match.
  
-I liked the project in general, and I understood more about the foundation of the framework Vue.js :+1:
+I liked a project in general, and I understood more about the foundation of the framework Vue.js :+1:
+
+You can view a project at this link [Football project](https://anakharsis9.github.io/football/)
 
 ## Project setup
 ```
