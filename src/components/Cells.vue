@@ -46,7 +46,7 @@ export default {
     },
     getRandomPlayer(players) {
       const rnd = Math.floor(Math.random() * players.length);
-      let [removed] = players.splice(rnd, 1);
+      const [removed] = players.splice(rnd, 1);
       return removed.number;
     },
   },

@@ -38,7 +38,7 @@ export default {
           });
         }
       }
-      return unordered.sort((a, b) => (a.count < b.count ? 1 : -1)).slice(0, 3);
+      return unordered.sort((a, b) => a.count - b.count).slice(0, 3);
     },
   },
   methods: {

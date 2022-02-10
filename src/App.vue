@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Field
-      class="field"
       @getMatchInfo="playedMatches.push($event)"
       :teamsList="teamsList"
+      class="field"
     ></Field>
     <info-tables
       @teamsListUpdate="teamsList = $event"

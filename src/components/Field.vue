@@ -52,62 +52,56 @@ export default {
     redTeamDist: null,
     blueTeamDist: null,
     isGameOver: false,
-    matchInfo: null,
-    matchWinner: null,
-    score: null,
   }),
   methods: {
     randomPlayersPlace() {
       this.isRandomPlayersPlace++;
     },
     startMatch() {
-      if (
+      const isTeamsFull =
         this.checkTeamDist(this.redTeamDist) &&
-        this.checkTeamDist(this.blueTeamDist)
-      ) {
-        const score1 = Math.floor(Math.random() * 20);
-        const score2 = Math.floor(Math.random() * 20);
-        
-        const winner = score1 > score2 ? 0 : score1 === score2 ? "tie" : 1;
-        alert("The match started. There is a hot game going on");
-        const d = new Date();
-        const date = `${d.getDate()}/${
-          d.getMonth() + 1
-        }/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
-        const whoPlayed = `${this.twoTeams[0].name} vs ${this.twoTeams[1].name}`;
-        const whoPlayedIds = [this.twoTeams[0].id, this.twoTeams[1].id];
+        this.checkTeamDist(this.blueTeamDist);
+      if (!isTeamsFull) return alert("Select players for both teams");
 
-        this.score = `${score1}:${score2}`;
-        if (winner === "tie") {
-          alert(
-            `It's tie match! In the match ${whoPlayed} winner is nobody! Score is ${this.score}`
-          );
-          this.matchInfo = {
-            winner: null,
-            winnerId: null,
-            score: this.score,
-            date: date,
-            teams: whoPlayed,
-            teamsIds: whoPlayedIds,
-          };
-        } else {
-          this.matchWinner = this.twoTeams[winner];
+      alert("The match started. There is a hot game going on");
 
-          alert(
-            `In the match ${whoPlayed} winner is ${this.matchWinner.name}! Score is ${this.score}`
-          );
-          this.matchInfo = {
-            winner: this.matchWinner.name,
-            winnerId: this.matchWinner.id,
-            score: this.score,
-            date: date,
-            teams: whoPlayed,
-            teamsIds: whoPlayedIds,
-          };
-        }
-        this.$emit("getMatchInfo", this.matchInfo);
-        this.isGameOver = true;
-      } else alert("Select players for both teams");
+      const score1 = Math.floor(Math.random() * 20);
+      const score2 = Math.floor(Math.random() * 20);
+      const winner = score1 > score2 ? 0 : score1 === score2 ? "tie" : 1;
+      const score = `${score1}:${score2}`;
+
+      const d = new Date();
+      const date = `${d.getDate()}/${
+        d.getMonth() + 1
+      }/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+
+      const whoPlayed = `${this.twoTeams[0].name} vs ${this.twoTeams[1].name}`;
+      const whoPlayedIds = [this.twoTeams[0].id, this.twoTeams[1].id];
+
+      const matchInfo = {
+        winner: null,
+        winnerId: null,
+        score,
+        date,
+        teams: whoPlayed,
+        teamsIds: whoPlayedIds,
+      };
+      if (winner === "tie") {
+        alert(
+          `It's tie match! In the match ${whoPlayed} winner is nobody! Score is ${score}`
+        );
+      } else {
+        const matchWinner = this.twoTeams[winner];
+
+        alert(
+          `In the match ${whoPlayed} winner is ${matchWinner.name}! Score is ${score}`
+        );
+        matchInfo.winner = matchWinner.name;
+        matchInfo.winnerId = matchWinner.id;
+      }
+
+      this.$emit("getMatchInfo", matchInfo);
+      this.isGameOver = true;
     },
     checkTeamDist(teamDist) {
       return !Object.values(teamDist).includes(-1);

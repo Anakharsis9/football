@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { getRandom } from "@/utils";
+
 export default {
   name: "MatchSettings",
   props: {
@@ -58,15 +60,20 @@ export default {
   methods: {
     settingMatch() {
       this.isSettingMode = true;
+
       const validTeams = this.teamsList.filter((t) => t.players.length > 5);
       const len = validTeams.length;
-      const random = this.getRandom(len);
+
+      const random = getRandom(len);
       this.team1 = validTeams[random];
-      let random2 = this.getRandom(len);
+
+      let random2 = getRandom(len);
       while (random2 === random) {
-        random2 = this.getRandom(len);
+        random2 = getRandom(len);
       }
+
       this.team2 = validTeams[random2];
+
       this.$emit("twoTeams", [this.team1, this.team2]);
       this.$emit("offGameOver", false);
     },
@@ -75,10 +82,6 @@ export default {
       this.team2 = {};
       this.isSettingMode = false;
     },
-    getRandom(length) {
-      return Math.floor(Math.random() * length);
-    },
-
     startMatch() {
       this.$emit("startMatch");
     },

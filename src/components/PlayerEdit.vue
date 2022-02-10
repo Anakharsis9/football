@@ -37,10 +37,11 @@ export default {
       this.playerError = false;
     },
     editPlayer(player) {
-      if (!this.numbers.includes(this.player.number)) {
-        this.isPlayerEdit = false;
-        this.$emit("updatePlayer", player);
-      } else this.playerError = true;
+      if (this.numbers.includes(this.player.number))
+        return (this.playerError = true);
+
+      this.isPlayerEdit = false;
+      this.$emit("updatePlayer", player);
     },
   },
 };
